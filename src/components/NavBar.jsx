@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/book.png'
+import { assets } from '../assets/assets'
 import styled from 'styled-components'
 
 const NavBar = () => {
@@ -38,7 +38,7 @@ const Button = styled.button`
       {/* left-section for logo */}
       <div >
         <Logo
-        src={logo} />
+        src={assets.logo} />
         
       </div>
 
