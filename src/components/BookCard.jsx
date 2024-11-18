@@ -31,6 +31,7 @@ const BookImage = styled.img`
 const BookInfo = styled.div`
   padding: 10px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 5px;
 `;
@@ -78,15 +79,16 @@ const ReviewButton = styled.button`
 `;
 
 // BookCard Component
-const BookCard = ({ image, title, author, rating, genre, onAddReview }) => {
+const BookCard = ({ image, title, author, rating, genre }) => {
   return (
+    <>
     <CardContainer>
-      <BookImage src='https://covers.openlibrary.org/b/id/8091016-L.jpg' alt={title} />
+      <BookImage src={image} alt='book-cover' />
       <BookInfo>
         <BookTitle>{title}</BookTitle>
         <BookAuthor>{author}</BookAuthor>
         <BookRating><FaStar/> {rating} / 5</BookRating>
-        <BookGenre>Genre: {genre}</BookGenre>
+        <BookGenre>{genre}</BookGenre>
         <ReviewButton>
           Add Review
         </ReviewButton>
@@ -95,6 +97,26 @@ const BookCard = ({ image, title, author, rating, genre, onAddReview }) => {
         </ReviewButton>
       </BookInfo>
     </CardContainer>
+
+    <CardContainer>
+      <BookImage src='https://covers.openlibrary.org/b/id/6979861-L.jpg' alt='book-cover' />
+      <BookInfo>
+        <BookTitle>The Hobbit</BookTitle>
+        <BookAuthor>J.R.R. Tolkien</BookAuthor>
+        <BookRating><FaStar/> 4 / 5</BookRating>
+        <BookGenre>Genre</BookGenre>
+        <ReviewButton>
+          Add Review
+        </ReviewButton>
+        <ReviewButton >
+          Check Review
+        </ReviewButton>
+      </BookInfo>
+    </CardContainer>
+
+  
+    </>
+    
   );
 };
 

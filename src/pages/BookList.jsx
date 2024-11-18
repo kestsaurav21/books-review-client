@@ -54,8 +54,8 @@ const BookList = () => {
       </SearchContainer>
 
       <CardList>
-        {bookData.map((book, idx) => (
-          <BookCard key={idx}
+        {bookData.map((book) => (
+          <BookCard key={book.id}
             image={book.image}
             title={book.name}
             author={book.author}
