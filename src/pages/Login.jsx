@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -90,18 +91,43 @@ const Link = styled.a`
 `;
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
+  const [ formData, setFormData ] = useState({
+    email: '',
+    password: ''
+  })
+
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name] : e.target.value
+    }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    navigate('/booklist')
+  }
+
+
   return (
     <Container>
       <FormWrapper>
         <Title>Login to your account</Title>
-        <Form>
+        <Form onSubmit={handleSubmit} >
           <div>
-            <Label htmlFor="usernameOrEmail">Username or Email</Label>
+            <Label htmlFor="email">Username or Email</Label>
             <Input
               type="text"
-              id="usernameOrEmail"
-              name="usernameOrEmail"
-              placeholder="john_doe or name@company.com"
+              id="email"
+              name="email"
+              value={formData.email}
+              placeholder="Enter your email"
+              onChange={handleChange}
               required
             />
           </div>
@@ -112,7 +138,9 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
+              value={formData.password}
               placeholder="••••••••"
+              onChange={handleChange}
               required
             />
           </div>

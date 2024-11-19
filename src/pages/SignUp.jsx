@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -113,18 +113,43 @@ const Link = styled.a`
 `;
 
 const Signup = () => {
+
+  const [ formData, setFormData ] = useState({
+    fullName: '',
+    username: '',
+    email: '',
+    password: '',
+    termsAccepted: false,
+  });
+
+
+  const handleChange = (e) => {
+    const { name, type, value, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  }
+
   return (
     <Container>
       <FormWrapper>
         <Title>Create an account</Title>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div>
             <Label htmlFor="fullName">Full Name</Label>
             <Input
               type="text"
               id="fullName"
               name="fullName"
-              placeholder="John Doe"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter Name"
               required
             />
           </div>
@@ -135,6 +160,8 @@ const Signup = () => {
               type="text"
               id="username"
               name="username"
+              value={formData.username}
+              onChange={handleChange}
               placeholder="john_doe"
               required
             />
@@ -146,6 +173,8 @@ const Signup = () => {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="name@company.com"
               required
             />
@@ -157,6 +186,8 @@ const Signup = () => {
               type="password"
               id="password"
               name="password"
+              value={formData.password}
+              onChange={handleChange}
               placeholder="••••••••"
               required
             />
@@ -167,6 +198,8 @@ const Signup = () => {
               id="termsAccepted"
               name="termsAccepted"
               type="checkbox"
+              checked={formData.termsAccepted}
+              onChange={handleChange}
               required
             />
             <CheckboxLabel htmlFor="termsAccepted">
